@@ -10,16 +10,13 @@ tmp_path="/tmp/$RANDOM"
 mkdir $tmp_path
 cd $tmp_path
 
-git clone -q "$clone_url" github
-git clone -q "ssh://git@bitbucket.org/georf/$bitbucket_slug.git" bitbucket
-
-rm -rf github/.git
-mv bitbucket/.git github/.git
-
+git clone "$clone_url" github
 cd github
-git add -A .
-git commit -am "Backup" > /dev/null
-git push -q origin master
+
+git remote add -f bitbucket "ssh://git@bitbucket.org/georf/$bitbucket_slug.git"
+git push bitbucket '*:*'
+git push bitbucket --all
+git push bitbucket --tags
 
 cd ~
 rm -rf $tmp_path
