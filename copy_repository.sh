@@ -1,6 +1,6 @@
 #!/bin/bash
 
-name=$1
+bitbucket_username=$1
 clone_url=$2
 bitbucket_slug=$3
 
@@ -13,7 +13,7 @@ cd $tmp_path
 git clone "$clone_url" github
 cd github
 
-git remote add -f bitbucket "ssh://git@bitbucket.org/georf/$bitbucket_slug.git"
+git remote add -f bitbucket "ssh://git@bitbucket.org/$bitbucket_username/$bitbucket_slug.git"
 git push bitbucket '*:*'
 git push bitbucket --all
 git push bitbucket --tags
