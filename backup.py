@@ -38,7 +38,7 @@ def find_or_create_bitbucket_repo(name):
 def handle_github_repo(name, clone_url):
   bitbucket_slug = find_or_create_bitbucket_repo("%s - %s" % (config["prefix"], name))
   (status,output) = commands.getstatusoutput('./copy_repository.sh "%s" "%s" "%s"' % (config["bitbucket_username"], clone_url, bitbucket_slug))
-  if output.strip() != "":
+  if status != 0 :
     print name
     print output
 
